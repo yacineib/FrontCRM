@@ -1,0 +1,32 @@
+﻿@page "/"
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Grids
+
+<PageTitle>Home</PageTitle>
+
+<h1 class="text-xl underline">
+    Hello world!
+</h1>
+
+
+@code{
+    public class model
+    {
+        public int id;
+        public string name;
+        public int age;
+    }
+
+    public List<model> listexemple;
+
+    protected override void OnInitialized()
+    {
+        listexemple = new List<model>
+        {
+            new () { id = 1, age = 18, name = "Yassine" },
+            new () { id = 2, age = 20, name = "Youness" },
+            new () { id = 3, age = 22, name = "Someone" },
+        };
+    }
+
+}
