@@ -3,18 +3,91 @@
 
 
 <style>
+    * {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .navbar-container{
+
+    }
+
+    .e-sidebar {
+        background-color: #f8f8f8;
+        color: black;
+    }
+
+    .text-content {
+        font-size: 1.5rem;
+        padding: 3rem;
+    }
+
+    nav {
+        margin-top : 13vh;
+    }
+
+    ul {
+        list-style: none; /* Removes bullet points from unordered lists */
+        display : flex;
+        flex-direction : column;
+
+    }
+
+    li {
+        display : flex;
+        align-items : center;
+        justify-content : flex-start;
+        height : 7vh;
+        cursor : pointer;
+        padding : 4%;
+    }
+
+    /* On hover */
+     li:hover {
+        background-color: dodgerblue; /* changes background */
+    }
+
+    nav img{
+        max-height : 3vh;
+        margin-right : 2vh;
+        margin-left : 1vh;
+    }
+
+    #header{
+        display : flex;
+        justify-content : flex-start;
+        row-gap : 9px;
+        align-items : center;
+        height : 4vh;
+        padding: 4vh 2vw 0 2vw;
+    }
+
+    #header img{
+        max-height: 8vh;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 
 </style>
 
-<div>
+<div class="navbar-container">
     <div id="header" style="height:45px;text-align: center;color:black;font-size:1.2rem;line-height:45px;">
-        DouaneCRM
+        <img src="Icons/Logo2.jpg" alt="Logo" />
+        <span>DouaneCRM</span>
     </div>
-</div>
-
-
-<div class="text-content" style="text-align: center;">
-
+    <nav>
+        <ul>
+            <li><img src="/Icons/dashboard.png" /><a href="/">Dashboard</a></li>
+            <li><img src="Icons/operateur.png"/><a href="/list-operateurs">Operateurs</a></li>
+            <li><img src="/Icons/control.png" /><a href="/list-controles">Controles</a></li>
+            <li><img src="/Icons/ficheacc.png" /><a href="/list-fiches-accompagnement">Fiches D'Accompagnement</a></li>
+            <li><img src="/Icons//liquidity.png" /><a href="/list-liquidations">Liquidations</a></li>
+            <li><img src="/Icons//courthouse.png" /><a href="/list-affaires-contentieuses">Affaires Contentieuses</a></li>
+            <li><img src="/Icons//achievement.png" /><a href="/list-reds">RED</a></li>
+        </ul>
+    </nav>
 </div>
 
 @code {
@@ -26,14 +99,3 @@
     }
 }
 
-<style>
-    .e-sidebar {
-        background-color: #f8f8f8;
-        color: black;
-    }
-
-    .text-content {
-        font-size: 1.5rem;
-        padding: 3rem;
-    }
-</style>
