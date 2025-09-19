@@ -1,0 +1,229 @@
+﻿@page "/list-affaires-contentieuses"
+
+@using Syncfusion.Blazor.Cards
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Notifications
+@using Syncfusion.Blazor.Popups
+@using Syncfusion.Blazor.Spinner
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.DropDowns
+@using System.ComponentModel.DataAnnotations
+
+<style>
+    .e-grid .e-rowcell.e-selectionbackground {
+        background-color: #6aaa37;
+        color: white !important;
+        font-weight: bold;
+    }
+
+    .e-toast-container .e-toast {
+        background-color: #6aaa37;
+    }
+
+    .e-toast-container .e-toast .e-toast-message .e-toast-content {
+        color: white;
+        font-size: 13px;
+    }
+
+    .e-toast-container .e-toast .e-toast-message .e-toast-title {
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .e-card {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .e-card .e-card-header .e-card-header-caption .e-card-header-title {
+        font-size: large;
+        font-weight: bold;
+        margin-bottom : 1%;
+    }
+</style>
+
+<PageTitle>Affaires Contentieuses</PageTitle>
+
+<SfToast @ref="ToastObj">
+    <ToastPosition X="Right" Y="Bottom"></ToastPosition>
+</SfToast>
+
+<SfDialog @ref="ConfirmDialog" Width="400px" IsModal="true" ShowCloseIcon="true" Visible="false"
+          Content="Are you sure you want to delete this affaire contentieuse?" Header="Confirm Deletion">
+    <DialogButtons>
+        <DialogButton IsPrimary="true" Content="Ok" OnClick="@OnConfirmDelete" />
+        <DialogButton Content="Cancel" OnClick="@OnCancelDelete" />
+    </DialogButtons>
+</SfDialog>
+
+<SfCard>
+    <CardHeader Title="Liste affaires contentieuses" />
+    <SfGrid Height="200" DataSource="@Affaires" TValue="AffaireContentieuse" EnableVirtualization="true" AllowGrouping="true" AllowSorting="true" AllowFiltering="true" AllowExcelExport="true"
+            Toolbar="@(new List<string> { "Add", "Edit", "Delete", "Update", "Cancel", "Search", "ExcelExport" })"
+            EditSettings="@EditSettings" @ref="AffairesGrid">
+        <GridEvents Created="fetchData" OnToolbarClick="OnToolbarClickHandler" OnActionBegin="OnActionBeginAsync" OnActionComplete="OnActionCompleteAsync" TValue="AffaireContentieuse"></GridEvents>
+        <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Excel"></GridFilterSettings>
+        <GridColumns>
+            <GridColumn Field="IdAffaire" Visible="false" IsPrimaryKey="true"></GridColumn>
+
+            <GridColumn Field="ReferenceAffaire" HeaderText="Reference" Width="120" ValidationRules="@(new ValidationRules { Required = true })"></GridColumn>
+
+            <GridColumn Field="DateOuverture" HeaderText="Date Ouverture" Width="120" Type="ColumnType.Date" Format="yyyy-MM-dd"></GridColumn>
+            <GridColumn Field="DateCloture" HeaderText="Date Cloture" Width="120" Type="ColumnType.Date" Format="yyyy-MM-dd"></GridColumn>
+
+            <GridColumn Field="Statut" HeaderText="Statut" Width="120">
+                <EditTemplate>
+                    <SfDropDownList TValue="string" TItem="string"
+                                    DataSource="@(new List<string>{ "enCours", "Cloturee" })"
+                                    @bind-Value="(context as AffaireContentieuse).Statut">
+                    </SfDropDownList>
+                </EditTemplate>
+            </GridColumn>
+
+            <GridColumn Field="Description" HeaderText="Description" Width="200"></GridColumn>
+
+            <GridColumn Field="OperateurId" HeaderText="Opérateur" Width="120">
+    @*             <Template>
+                    @{
+                        var op = Operateurs.FirstOrDefault(o => o.OperateurId == (context as AffaireContentieuse)?.OperateurId);
+                        var nom = op?.Nom ?? "Unknown";
+                    }
+                    <span>@nom</span>
+                </Template>
+                <EditTemplate>
+                    <SfDropDownList TItem="Operateur" TValue="int"
+                                    DataSource="@Operateurs"
+                                    Placeholder="Select Operateur"
+                                    @bind-Value="(context as AffaireContentieuse).OperateurId">
+                        <DropDownListFieldSettings Text="Nom" Value="OperateurId"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                </EditTemplate> *@
+            </GridColumn>
+        </GridColumns>
+        <SfSpinner @bind-Visible="@VisibleProperty"></SfSpinner>
+    </SfGrid>
+</SfCard>
+
+@code {
+    // AffaireContentieuse Model
+    public class AffaireContentieuse
+    {
+        public int IdAffaire { get; set; }
+        public DateTime DateCloture { get; set; }
+        public DateTime DateOuverture { get; set; }
+        public string Statut { get; set; } // enum(enCours/Cloturee)
+        public string Description { get; set; }
+        public string ReferenceAffaire { get; set; }
+        public int OperateurId { get; set; }
+    }
+    private List<AffaireContentieuse>? Affaires;
+    //private List<Operateur> Operateurs = new();
+    private SfGrid<AffaireContentieuse> AffairesGrid = null!;
+    private SfToast ToastObj = null!;
+    private SfDialog ConfirmDialog = null!;
+    private ActionEventArgs<AffaireContentieuse>? PendingDeleteArgs;
+    private bool VisibleProperty { get; set; }
+
+    private GridEditSettings EditSettings = new()
+    {
+        AllowAdding = true,
+        AllowEditing = true,
+        AllowDeleting = true,
+        Mode = EditMode.Dialog
+    };
+
+    private async Task fetchData()
+    {
+        // VisibleProperty = true;
+        // Operateurs = await OperateurService.GetAllAsync();
+        // Affaires = await AffaireContentieuseService.GetAllAsync();
+        Affaires = new List<AffaireContentieuse> {
+            new() { IdAffaire=1, DateOuverture=DateTime.Now.AddMonths(-6), DateCloture=DateTime.Now.AddMonths(-1), Statut="Cloturee", Description="Litige commercial résolu", ReferenceAffaire="AFF-2023-001", OperateurId=3 },
+            new() { IdAffaire=2, DateOuverture=DateTime.Now.AddMonths(-2), DateCloture=DateTime.MinValue, Statut="enCours", Description="Procédure en cours avec un fournisseur", ReferenceAffaire="AFF-2023-002", OperateurId=5 },
+            new() { IdAffaire=3, DateOuverture=DateTime.Now.AddMonths(-12), DateCloture=DateTime.Now.AddMonths(-3), Statut="Cloturee", Description="Affaire juridique clôturée avec succès", ReferenceAffaire="AFF-2022-078", OperateurId=2 }
+        };
+        // VisibleProperty = false;
+    }
+
+    private async Task OnToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item?.Id?.Contains("_excelexport") == true)
+            await AffairesGrid.ExportToExcelAsync();
+    }
+
+    private async Task OnActionBeginAsync(ActionEventArgs<AffaireContentieuse> args)
+    {
+        if (args.RequestType == Syncfusion.Blazor.Grids.Action.Save)
+        {
+            if (args.Data != null)
+            {
+                var context = new ValidationContext(args.Data);
+                var results = new List<ValidationResult>();
+                if (!Validator.TryValidateObject(args.Data, context, results, true))
+                {
+                    await ShowToastAsync("Validation failed: " + string.Join(", ", results.Select(r => r.ErrorMessage)), "Error");
+                    args.Cancel = true;
+                }
+            }
+        }
+        else if (args.RequestType == Syncfusion.Blazor.Grids.Action.Delete)
+        {
+            if (args.Data != null)
+            {
+                PendingDeleteArgs = args;
+                await ConfirmDialog.ShowAsync();
+                args.Cancel = true;
+            }
+        }
+    }
+
+    private async Task OnActionCompleteAsync(ActionEventArgs<AffaireContentieuse> args)
+    {
+        // if (args.RequestType == Syncfusion.Blazor.Grids.Action.Save && args.Data != null)
+        // {
+        //     if (args.Action == "Add")
+        //     {
+        //         await AffaireContentieuseService.AddAsync(args.Data);
+        //         await ShowToastAsync("Affaire added successfully.", "Success");
+        //     }
+        //     else if (args.Action == "Edit")
+        //     {
+        //         await AffaireContentieuseService.UpdateAsync(args.Data);
+        //         await ShowToastAsync("Affaire updated successfully.", "Success");
+        //     }
+        //     Affaires = await AffaireContentieuseService.GetAllAsync();
+        //     StateHasChanged();
+        // }
+    }
+
+    private async Task OnConfirmDelete(Microsoft.AspNetCore.Components.Web.MouseEventArgs args)
+    {
+        // if (PendingDeleteArgs?.Data != null)
+        // {
+        //     await AffaireContentieuseService.DeleteAsync(PendingDeleteArgs.Data.IdAffaire);
+        //     Affaires?.Remove(PendingDeleteArgs.Data);
+        //     await AffairesGrid.Refresh();
+        //     await ShowToastAsync("Affaire deleted successfully.", "Success");
+        // }
+        // await ConfirmDialog.HideAsync();
+    }
+
+    private async Task OnCancelDelete(Microsoft.AspNetCore.Components.Web.MouseEventArgs args)
+    {
+        await ConfirmDialog.HideAsync();
+    }
+
+    private async Task ShowToastAsync(string message, string title)
+    {
+        await ToastObj.ShowAsync(new ToastModel
+        {
+            Content = message,
+            Title = title,
+            CssClass = title == "Success" ? "e-toast-success" : "e-toast-danger",
+            Icon = title == "Success" ? "e-success toast-icons" : "e-error toast-icons",
+            Timeout = 3000
+        });
+    }
+}
+

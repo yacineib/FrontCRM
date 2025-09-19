@@ -50,3 +50,4 @@ C:\Users\yacin\Desktop\PFE\DouaneCRM\DouaneCRM.Presentation\obj\Debug\net8.0\ref
 C:\Users\yacin\Desktop\PFE\DouaneCRM\DouaneCRM.Presentation\obj\Debug\net8.0\DouaneCRM.Presentation.pdb
 C:\Users\yacin\Desktop\PFE\DouaneCRM\DouaneCRM.Presentation\obj\Debug\net8.0\DouaneCRM.Presentation.genruntimeconfig.cache
 C:\Users\yacin\Desktop\PFE\DouaneCRM\DouaneCRM.Presentation\obj\Debug\net8.0\ref\DouaneCRM.Presentation.dll
+C:\Users\yacin\Desktop\PFE\DouaneCRM\DouaneCRM.Presentation\obj\Debug\net8.0\DouaneCRM.Presentation.sourcelink.json

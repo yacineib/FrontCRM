@@ -1,6 +1,15 @@
-﻿<header class="border-b border-gray-300 tracking-wide relative z-50 z-[-1]">
+﻿@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
 
-    <div class="flex flex-wrap items-center gap-4 px-10 py-3 relative bg-white min-h-[65px]">
+<div class="control-container">
+    <SfAppBar ColorMode="AppBarColor.Primary">
+        <AppBarSpacer></AppBarSpacer>
+        <SfButton CssClass="e-inherit" Content="Se déconnecter"></SfButton>
+    </SfAppBar>
+</div>
 
-    </div>
-</header>
+<style>
+    .control-container .e-btn.e-inherit {
+        margin: 0 3px;
+    }
+</style>

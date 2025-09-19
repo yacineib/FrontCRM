@@ -1,0 +1,198 @@
+﻿@page "/list-reds"
+@using Syncfusion.Blazor.Cards
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.Notifications
+@using Syncfusion.Blazor.Popups
+@using Syncfusion.Blazor.Spinner
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.DropDowns
+
+<style>
+    .e-grid .e-rowcell.e-selectionbackground {
+        background-color: #6aaa37;
+        color: white !important;
+        font-weight: bold;
+    }
+
+    .e-toast-container .e-toast {
+        background-color: #6aaa37;
+    }
+
+    .e-card {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .e-card .e-card-header .e-card-header-caption .e-card-header-title {
+        font-size: large;
+        font-weight: bold;
+        margin-bottom: 1%;
+    }
+</style>
+
+<PageTitle>Liste RED</PageTitle>
+
+<SfToast @ref="ToastObj">
+    <ToastPosition X="Right" Y="Bottom"></ToastPosition>
+</SfToast>
+
+<SfDialog @ref="ConfirmDialog" Width="300px" IsModal="true" ShowCloseIcon="true" Visible="false"
+          Content="Voulez-vous vraiment supprimer ce RED ?" Header="Confirmation">
+    <DialogButtons>
+        <DialogButton IsPrimary="true" Content="Ok" OnClick="@OnConfirmDelete" />
+        <DialogButton Content="Annuler" OnClick="@OnCancelDelete" />
+    </DialogButtons>
+</SfDialog>
+
+<SfCard>
+    <CardHeader Title="Liste REDs" />
+    <SfGrid Height="200" DataSource="@REDs" TValue="RED" AllowSorting="true" AllowFiltering="true" AllowPaging="true"
+            Toolbar="@(new List<string> { "Add", "Edit", "Delete", "Update", "Cancel", "Search" })"
+            EditSettings="@EditSettings" @ref="REDsGrid">
+        <GridEvents Created="fetchData" OnActionBegin="OnActionBeginAsync" OnActionComplete="OnActionCompleteAsync" TValue="RED"></GridEvents>
+
+        <GridColumns>
+            <GridColumn Field="IdRED" Visible="false" HeaderText="ID" IsPrimaryKey="true"></GridColumn>
+            <GridColumn Field="NumeroCompte" HeaderText="Numéro Compte" Width="120" ValidationRules="@(new ValidationRules { Required = true })"></GridColumn>
+            <GridColumn Field="Regime" HeaderText="Régime" Width="100"></GridColumn>
+            <GridColumn Field="BureauDouanier" HeaderText="Bureau Douanier" Width="130"></GridColumn>
+            <GridColumn Field="DateOuverture" HeaderText="Date Ouverture" Type="ColumnType.Date" Format="d" Width="130"></GridColumn>
+            <GridColumn Field="DateEcheance" HeaderText="Date Échéance" Type="ColumnType.Date" Format="d" Width="130"></GridColumn>
+            <GridColumn Field="ValeurInitiale" HeaderText="Valeur Initiale" Format="C2" Width="130"></GridColumn>
+            <GridColumn Field="SoldeTheorique" HeaderText="Solde Théorique" Format="C2" Width="130"></GridColumn>
+
+            <GridColumn Field="OperateurId" HeaderText="Opérateur" Width="150">
+                <Template>
+                    @{
+                        var op = OperateursList.FirstOrDefault(o => o.IdOperateur == (context as RED)?.OperateurId);
+                        var nom = op?.Nom ?? "Inconnu";
+                    }
+                    <span>@nom</span>
+                </Template>
+                <EditTemplate>
+                    <SfDropDownList TItem="Operateur"
+                                    TValue="int"
+                                    DataSource="@OperateursList"
+                                    Placeholder="Opérateur"
+                                    FloatLabelType="FloatLabelType.Always"
+                                    @bind-Value="(context as RED).OperateurId">
+                        <DropDownListFieldSettings Text="Nom" Value="IdOperateur"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                </EditTemplate>
+            </GridColumn>
+        </GridColumns>
+
+        <SfSpinner @bind-Visible="@VisibleProperty"></SfSpinner>
+    </SfGrid>
+</SfCard>
+
+@code {
+    private List<RED>? REDs;
+    private List<Operateur> OperateursList = new();
+    private SfGrid<RED> REDsGrid = null!;
+    private SfToast ToastObj = null!;
+    private SfDialog ConfirmDialog = null!;
+    private ActionEventArgs<RED>? PendingDeleteArgs;
+    private bool VisibleProperty { get; set; } = false;
+
+    private GridEditSettings EditSettings = new()
+    {
+        AllowAdding = true,
+        AllowEditing = true,
+        AllowDeleting = true,
+        Mode = EditMode.Dialog
+    };
+
+    private async Task fetchData()
+    {
+        // VisibleProperty = true;
+        // OperateursList = await OperateurService.GetAllAsync();
+        // REDs = await REDService.GetAllAsync();
+        // VisibleProperty = false;
+    }
+
+    private async Task OnActionBeginAsync(ActionEventArgs<RED> args)
+    {
+        if (args.RequestType == Syncfusion.Blazor.Grids.Action.Save && args.Data != null)
+        {
+            // Simple validation
+            if (string.IsNullOrWhiteSpace(args.Data.NumeroCompte))
+            {
+                await ShowToastAsync("Numéro Compte est requis", "Erreur");
+                args.Cancel = true;
+            }
+        }
+        else if (args.RequestType == Syncfusion.Blazor.Grids.Action.Delete && args.Data != null)
+        {
+            PendingDeleteArgs = args;
+            await ConfirmDialog.ShowAsync();
+            args.Cancel = true;
+        }
+    }
+
+    private async Task OnActionCompleteAsync(ActionEventArgs<RED> args)
+    {
+        // if (args.RequestType == Syncfusion.Blazor.Grids.Action.Save && args.Data != null)
+        // {
+        //     if (args.Action == "Add")
+        //     {
+        //         await REDService.AddAsync(args.Data);
+        //         await ShowToastAsync("RED ajouté avec succès.", "Succès");
+        //     }
+        //     else if (args.Action == "Edit")
+        //     {
+        //         await REDService.UpdateAsync(args.Data);
+        //         await ShowToastAsync("RED mis à jour.", "Succès");
+        //     }
+
+        //     REDs = await REDService.GetAllAsync();
+        // }
+    }
+
+    private async Task OnConfirmDelete(Microsoft.AspNetCore.Components.Web.MouseEventArgs args)
+    {
+        // if (PendingDeleteArgs?.Data != null)
+        // {
+        //     await REDService.DeleteAsync(PendingDeleteArgs.Data.IdRED);
+        //     REDs?.Remove(PendingDeleteArgs.Data);
+        //     await REDsGrid.Refresh();
+        //     await ShowToastAsync("RED supprimé.", "Succès");
+        // }
+        // await ConfirmDialog.HideAsync();
+    }
+
+    private async Task OnCancelDelete(Microsoft.AspNetCore.Components.Web.MouseEventArgs args)
+    {
+        await ConfirmDialog.HideAsync();
+    }
+
+    private async Task ShowToastAsync(string message, string title)
+    {
+        await ToastObj.ShowAsync(new ToastModel
+        {
+            Content = message,
+            Title = title,
+            Timeout = 3000
+        });
+    }
+
+    public class RED
+    {
+        public int IdRED { get; set; }
+        public string NumeroCompte { get; set; }
+        public string Regime { get; set; }
+        public string BureauDouanier { get; set; }
+        public DateTime DateOuverture { get; set; }
+        public DateTime DateEcheance { get; set; }
+        public decimal ValeurInitiale { get; set; }
+        public decimal SoldeTheorique { get; set; }
+        public int OperateurId { get; set; }
+    }
+
+    public class Operateur
+    {
+        public int IdOperateur { get; set; }
+        public string Nom { get; set; }
+    }
+}

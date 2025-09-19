@@ -1,4 +1,3 @@
-wwwroot\app.css
 wwwroot\favicon.png
 wwwroot\Icons\Logo.jpg
-wwwroot\output\tailwind.css
+wwwroot\app.css

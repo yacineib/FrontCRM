@@ -1,17 +1,62 @@
-﻿@inherits LayoutComponentBase
+﻿@using Syncfusion.Blazor.Layouts
+@using Syncfusion.Blazor.Lists
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Navigations
+@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
+
+<style>
+    .container {
+        width : 100%;
+        min-height : 100vh;
+        display : flex;
+    }
+
+    .navbar{
+        width : 20%;
+    }
+
+    .main-content{
+        width : 80%;
+    }
+
+    .content{
+        padding : 25px 20px;
+    }
+</style>
+
+<div class="container">
+    <div class="navbar">
+        <NavMenu/>
     </div>
-
-    <main class="ml-[14%]">
-        <div class="top-row px-4">
+    <div class="main-content">
+        <div class="appbar">
             <TopBar/>
         </div>
-
-        <article class="ml-[5%] mt-[3vh]">
+        <div class="content">
             @Body
-        </article>
-    </main>
+        </div>
+    </div>
 </div>
+
+@code {
+    private bool SidebarOpen = true;
+
+    private List<MenuItem> MenuItems = new()
+    {
+        new MenuItem { Text = "Dashboards", Url = "/"},
+        new MenuItem { Text = "Menu Levels", Url = "/menulevels"},
+        new MenuItem { Text = "Inbox", Url = "/inbox"},
+        new MenuItem { Text = "Gallery", Url = "/gallery"},
+        new MenuItem { Text = "Pages", Url = "/pages"},
+        new MenuItem { Text = "Grid Layouts", Url = "/grids"},
+        new MenuItem { Text = "Forms", Url = "/forms"},
+        new MenuItem { Text = "Settings", Url = "/settings"}
+    };
+
+    public class MenuItem
+    {
+        public string Text { get; set; }
+        public string Url { get; set; }
+    }
+}
