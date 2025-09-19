@@ -7,6 +7,18 @@
       "RelativeMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|solutionrelative:douanecrm.presentation\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|c:\\users\\gigabyte\\onedrive\\desktop\\new folder (4)\\frontcrm\\douanecrm.presentation\\components\\pages\\liquidations\\listliquidations.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|solutionrelative:douanecrm.presentation\\components\\pages\\liquidations\\listliquidations.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|c:\\users\\gigabyte\\onedrive\\desktop\\new folder (4)\\frontcrm\\douanecrm.presentation\\components\\pages\\affairecontentieuse\\listaffairescontentieuses.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|solutionrelative:douanecrm.presentation\\components\\pages\\affairecontentieuse\\listaffairescontentieuses.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|c:\\users\\gigabyte\\onedrive\\desktop\\new folder (4)\\frontcrm\\douanecrm.presentation\\components\\pages\\operateur\\listoperateurs.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|solutionrelative:douanecrm.presentation\\components\\pages\\operateur\\listoperateurs.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|c:\\users\\gigabyte\\onedrive\\desktop\\new folder (4)\\frontcrm\\douanecrm.presentation\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|solutionrelative:douanecrm.presentation\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -17,14 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|c:\\users\\gigabyte\\onedrive\\desktop\\new folder (4)\\frontcrm\\douanecrm.presentation\\components\\pages\\red\\listred.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|solutionrelative:douanecrm.presentation\\components\\pages\\red\\listred.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|c:\\users\\gigabyte\\onedrive\\desktop\\new folder (4)\\frontcrm\\douanecrm.presentation\\components\\pages\\affairecontentieuse\\listaffairescontentieuses.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|solutionrelative:douanecrm.presentation\\components\\pages\\affairecontentieuse\\listaffairescontentieuses.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|c:\\users\\gigabyte\\onedrive\\desktop\\new folder (4)\\frontcrm\\douanecrm.presentation\\components\\pages\\operateur\\listoperateurs.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|solutionrelative:douanecrm.presentation\\components\\pages\\operateur\\listoperateurs.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{93FE8177-1B9A-4EF4-8C99-6E3AA4AEA751}|DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj|c:\\users\\gigabyte\\onedrive\\desktop\\new folder (4)\\frontcrm\\douanecrm.presentation\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -70,15 +74,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ListLiquidations.razor",
+              "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\Liquidations\\ListLiquidations.razor",
+              "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Pages\\Liquidations\\ListLiquidations.razor",
+              "ToolTip": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\Liquidations\\ListLiquidations.razor",
+              "RelativeToolTip": "DouaneCRM.Presentation\\Components\\Pages\\Liquidations\\ListLiquidations.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-19T15:41:22.929Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -88,7 +97,7 @@
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Layout\\NavMenu.razor",
               "ToolTip": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Layout\\NavMenu.razor",
               "RelativeToolTip": "DouaneCRM.Presentation\\Components\\Layout\\NavMenu.razor",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAFIAAABPAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEIAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-09-17T20:49:54.226Z",
               "EditorCaption": ""
@@ -96,30 +105,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ListRED.razor",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\RED\\ListRED.razor",
-              "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Pages\\RED\\ListRED.razor",
-              "ToolTip": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\RED\\ListRED.razor",
-              "RelativeToolTip": "DouaneCRM.Presentation\\Components\\Pages\\RED\\ListRED.razor",
-              "ViewState": "AgIAAH0AAAAAAAAAAAAAADEAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-19T04:53:51.961Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "ListOperateurs.razor",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\Operateur\\ListOperateurs.razor",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Pages\\Operateur\\ListOperateurs.razor",
               "ToolTip": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\Operateur\\ListOperateurs.razor",
               "RelativeToolTip": "DouaneCRM.Presentation\\Components\\Pages\\Operateur\\ListOperateurs.razor",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAD8AAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEYAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-19T01:42:57.858Z"
+              "WhenOpened": "2025-09-19T01:42:57.858Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "MainLayout.razor",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Layout\\MainLayout.razor",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Layout\\MainLayout.razor",
@@ -127,12 +125,11 @@
               "RelativeToolTip": "DouaneCRM.Presentation\\Components\\Layout\\MainLayout.razor",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAB4AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-17T20:48:32.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T20:48:32.187Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Routes.razor",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Routes.razor",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Routes.razor",
@@ -144,7 +141,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "TopBar.razor",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Layout\\TopBar.razor",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Layout\\TopBar.razor",
@@ -152,24 +149,36 @@
               "RelativeToolTip": "DouaneCRM.Presentation\\Components\\Layout\\TopBar.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-18T00:42:42.635Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-18T00:42:42.635Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "ListAffairesContentieuses.razor",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\AffaireContentieuse\\ListAffairesContentieuses.razor",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Pages\\AffaireContentieuse\\ListAffairesContentieuses.razor",
               "ToolTip": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\AffaireContentieuse\\ListAffairesContentieuses.razor",
               "RelativeToolTip": "DouaneCRM.Presentation\\Components\\Pages\\AffaireContentieuse\\ListAffairesContentieuses.razor",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAADYAAABFAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAEcAAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-19T05:11:42.369Z"
+              "WhenOpened": "2025-09-19T05:11:42.369Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "ListRED.razor",
+              "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\RED\\ListRED.razor",
+              "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Pages\\RED\\ListRED.razor",
+              "ToolTip": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\RED\\ListRED.razor",
+              "RelativeToolTip": "DouaneCRM.Presentation\\Components\\Pages\\RED\\ListRED.razor",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAAADEAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-19T04:53:51.961Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Home.razor",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\Home.razor",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Pages\\Home.razor",
@@ -181,7 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "Counter.razor",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\Counter.razor",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Pages\\Counter.razor",
@@ -193,7 +202,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "App.razor",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\App.razor",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\App.razor",
@@ -205,7 +214,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Program.cs",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Program.cs",
@@ -217,7 +226,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "DouaneCRM.Presentation.csproj",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\DouaneCRM.Presentation.csproj",
@@ -229,7 +238,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "NavMenu.razor.css",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Layout\\NavMenu.razor.css",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Layout\\NavMenu.razor.css",
@@ -241,7 +250,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Weather.razor",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\Pages\\Weather.razor",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\Pages\\Weather.razor",
@@ -253,7 +262,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "_Imports.razor",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\OneDrive\\Desktop\\New folder (4)\\FrontCRM\\DouaneCRM.Presentation\\Components\\_Imports.razor",
               "RelativeDocumentMoniker": "DouaneCRM.Presentation\\Components\\_Imports.razor",

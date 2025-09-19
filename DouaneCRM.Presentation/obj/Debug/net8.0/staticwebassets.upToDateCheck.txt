@@ -1,8 +1,11 @@
 wwwroot\app.css
 wwwroot\favicon.png
+wwwroot\Icons\achievement.png
 wwwroot\Icons\control.png
+wwwroot\Icons\courthouse.png
 wwwroot\Icons\dashboard.png
 wwwroot\Icons\ficheacc.png
+wwwroot\Icons\liquidity.png
 wwwroot\Icons\Logo.jpg
 wwwroot\Icons\Logo2.jpg
 wwwroot\Icons\operateur.png

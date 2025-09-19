@@ -1,0 +1,192 @@
+﻿@page "/list-liquidations"
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Cards
+@using Syncfusion.Blazor.Data
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Internal
+@using Syncfusion.Blazor.Layouts
+@using Syncfusion.Blazor.Notifications
+@using Syncfusion.Blazor.Popups
+@using Syncfusion.Blazor.Spinner
+
+<style>
+    .e-grid .e-rowcell.e-selectionbackground {
+        background-color: #6aaa37;
+        color: white !important;
+        font-weight: bold;
+    }
+
+    .e-toast-container .e-toast {
+        background-color: #6aaa37;
+    }
+
+    .e-toast-container .e-toast .e-toast-message .e-toast-content {
+        color: white;
+        font-size: 13px;
+        font-weight: normal;
+    }
+
+    .e-toast-container .e-toast .e-toast-message .e-toast-title {
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .e-card {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .e-card .e-card-header .e-card-header-caption .e-card-header-title {
+        font-size: large;
+        font-weight: bold;
+        margin-bottom: 1%;
+    }
+</style>
+
+<PageTitle>Liquidations</PageTitle>
+
+<SfToast @ref="ToastObj">
+    <ToastPosition X="Right" Y="Bottom"></ToastPosition>
+</SfToast>
+
+<SfDialog @ref="ConfirmDialog" Width="400px" IsModal="true" ShowCloseIcon="true" Visible="false"
+          Content="Êtes-vous sûr de vouloir supprimer cette liquidation ?" Header="Confirmer la suppression">
+    <DialogButtons>
+        <DialogButton IsPrimary="true" Content="Ok" OnClick="@OnConfirmDelete" />
+        <DialogButton Content="Annuler" OnClick="@OnCancelDelete" />
+    </DialogButtons>
+</SfDialog>
+
+<SfCard>
+    <CardHeader Title="Liste des Liquidations" />
+    <SfGrid Height="200" DataSource="@Liquidations" TValue="Liquidation" AllowPaging="true" AllowSorting="true" AllowFiltering="true" AllowExcelExport="true"
+            Toolbar="@(new List<string> { "Add", "Edit", "Delete", "Update", "Cancel", "Search", "ExcelExport" })"
+            EditSettings="@EditSettings" @ref="LiquidationsGrid">
+        <GridEvents Created="fetchData" OnToolbarClick="OnToolbarClickHandler" OnActionBegin="OnActionBeginAsync" OnActionComplete="OnActionCompleteAsync" TValue="Liquidation"></GridEvents>
+        <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Excel"></GridFilterSettings>
+        <GridColumns>
+            <GridColumn Field="Montant" HeaderText="Montant" Width="150" ValidationRules="@(new ValidationRules { Required = true })" Format="C2"></GridColumn>
+            <GridColumn Field="StatutPaiement" HeaderText="Statut Paiement" Width="150" EditType="EditType.DropDownEdit">
+                <Edit params="@(new { DataSource = new string[] { "Paye", "EnAttente" } })" />
+            </GridColumn>
+            <GridColumn Field="Date" HeaderText="Date" Width="150" Format="d" EditType="EditType.DatePickerEdit"></GridColumn>
+            <GridColumn Field="DateEcheance" HeaderText="Date Échéance" Width="150" Format="d" EditType="EditType.DatePickerEdit"></GridColumn>
+            <GridColumn Field="OperateurId" HeaderText="Opérateur Id" Width="120"></GridColumn>
+        </GridColumns>
+        <SfSpinner @bind-Visible="@VisibleProperty"></SfSpinner>
+    </SfGrid>
+</SfCard>
+
+@code {
+    public class Liquidation
+    {
+        public int IdLiquidation { get; set; }
+        public decimal Montant { get; set; }
+        public string StatutPaiement { get; set; } // Paye / EnAttente
+        public DateTime DateEcheance { get; set; }
+        public DateTime Date { get; set; }
+        public int OperateurId { get; set; }
+    }
+
+    private List<Liquidation>? Liquidations;
+    private SfGrid<Liquidation> LiquidationsGrid = null!;
+    private SfToast ToastObj = null!;
+    private SfDialog ConfirmDialog = null!;
+    private ActionEventArgs<Liquidation>? PendingDeleteArgs;
+    private bool VisibleProperty { get; set; } = false;
+
+    private GridEditSettings EditSettings = new()
+    {
+        AllowAdding = true,
+        AllowEditing = true,
+        AllowDeleting = true,
+        Mode = EditMode.Dialog
+    };
+
+    private async Task fetchData()
+    {
+        VisibleProperty = true;
+        //Liquidations = await LiquidationService.GetAllAsync();
+        Liquidations = Enumerable.Range(1, 5).Select(x => new Liquidation()
+        {
+            IdLiquidation = x,
+            Montant = 1000 + x * 250,
+            StatutPaiement = x % 2 == 0 ? "Paye" : "EnAttente",
+            Date = DateTime.Now.AddDays(-x * 10),
+            DateEcheance = DateTime.Now.AddDays(x * 5),
+            OperateurId = x
+        }).ToList();
+        VisibleProperty = false;
+    }
+
+    private async Task OnToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item?.Id?.Contains("_excelexport") == true)
+        {
+            await LiquidationsGrid.ExportToExcelAsync();
+        }
+    }
+
+    private async Task OnActionBeginAsync(ActionEventArgs<Liquidation> args)
+    {
+        if (args.RequestType == Syncfusion.Blazor.Grids.Action.Delete)
+        {
+            if (args.Data != null)
+            {
+                PendingDeleteArgs = args;
+                await ConfirmDialog.ShowAsync();
+                args.Cancel = true;
+            }
+        }
+    }
+
+    private async Task OnActionCompleteAsync(ActionEventArgs<Liquidation> args)
+    {
+        // if (args.RequestType == Syncfusion.Blazor.Grids.Action.Save && args.Data != null)
+        // {
+        //     if (args.Action == "Add")
+        //     {
+        //         await LiquidationService.AddAsync(args.Data);
+        //         await ShowToastAsync("Liquidation ajoutée avec succès.", "Succès");
+        //     }
+        //     else if (args.Action == "Edit")
+        //     {
+        //         await LiquidationService.UpdateAsync(args.Data);
+        //         await ShowToastAsync("Liquidation mise à jour.", "Succès");
+        //     }
+        //     Liquidations = await LiquidationService.GetAllAsync();
+        //     StateHasChanged();
+        // }
+    }
+
+    private async Task OnConfirmDelete(Microsoft.AspNetCore.Components.Web.MouseEventArgs args)
+    {
+        // if (PendingDeleteArgs?.Data != null)
+        // {
+        //     await LiquidationService.DeleteAsync(PendingDeleteArgs.Data.IdLiquidation);
+        //     await ShowToastAsync("Liquidation supprimée.", "Succès");
+        //     Liquidations?.Remove(PendingDeleteArgs.Data);
+        //     await LiquidationsGrid.Refresh();
+        // }
+        // await ConfirmDialog.HideAsync();
+    }
+
+    private async Task OnCancelDelete(Microsoft.AspNetCore.Components.Web.MouseEventArgs args)
+    {
+        await ConfirmDialog.HideAsync();
+    }
+
+    private async Task ShowToastAsync(string message, string title)
+    {
+        await ToastObj.ShowAsync(new ToastModel
+        {
+            Content = message,
+            Title = title,
+            CssClass = title == "Succès" ? "e-toast-success" : "e-toast-danger",
+            Icon = title == "Succès" ? "e-success toast-icons" : "e-error toast-icons",
+            Timeout = 3000
+        });
+    }
+}
+

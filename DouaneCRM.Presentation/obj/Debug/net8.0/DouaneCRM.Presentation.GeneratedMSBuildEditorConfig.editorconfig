@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/GIGABYTE/OneDrive/Desktop/New folder (4)/FrontCRM/DouaneCRM.Presentation/Components/Pages/Liquidations/ListLiquidations.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMaXF1aWRhdGlvbnNcTGlzdExpcXVpZGF0aW9ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/GIGABYTE/OneDrive/Desktop/New folder (4)/FrontCRM/DouaneCRM.Presentation/Components/Pages/Operateur/ListOperateurs.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xPcGVyYXRldXJcTGlzdE9wZXJhdGV1cnMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
