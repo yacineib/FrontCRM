@@ -67,6 +67,14 @@
         <GridEvents Created="fetchData" OnToolbarClick="OnToolbarClickHandler" OnActionBegin="OnActionBeginAsync" OnActionComplete="OnActionCompleteAsync" TValue="Operateur"></GridEvents>
         <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Excel"></GridFilterSettings>
         <GridColumns>
+            <GridColumn HeaderText="Image" Width="120">
+                <Template>
+                    @{
+                        var data = (context as Operateur);
+                    }
+                    <img src="@data.Avatar" alt="avatar" style="width:40px; height:40px; border-radius:50%;" />
+                </Template>
+            </GridColumn>
             <GridColumn Field="Nom" HeaderText="Nom" Width="150" ValidationRules="@(new ValidationRules { Required = true })"></GridColumn>
             <GridColumn Field="RC" HeaderText="RC" Width="120"></GridColumn>
             <GridColumn Field="IF" HeaderText="IF" Width="120"></GridColumn>
@@ -92,6 +100,9 @@
         public string Email { get; set; }
         public string ActivitePrincipale { get; set; }
         public string StatutDouanier { get; set; }
+
+        // Avatar URL or base64 string
+        public string Avatar { get; set; }
     }
     private List<Operateur>? Operateurs;
     private SfGrid<Operateur> OperateursGrid = null!;
@@ -111,7 +122,6 @@
     private async Task fetchData()
     {
         VisibleProperty = true;
-        //Operateurs = await OperateurService.GetAllAsync();
         Operateurs = Enumerable.Range(1, 5).Select(x => new Operateur()
         {
             IdOperateur = x,
@@ -122,7 +132,8 @@
             Telephone = $"06000000{x}",
             Email = $"op{x}@test.com",
             ActivitePrincipale = "Commerce",
-            StatutDouanier = x % 2 == 0 ? "Actif" : "Suspendu"
+            StatutDouanier = x % 2 == 0 ? "Actif" : "Suspendu",
+            Avatar = "icons/7309681.jpg" // random avatar
         }).ToList();
         VisibleProperty = false;
     }

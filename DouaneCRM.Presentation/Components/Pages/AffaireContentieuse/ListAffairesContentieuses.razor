@@ -59,14 +59,12 @@
 
 <SfCard>
     <CardHeader Title="Liste affaires contentieuses" />
-    <SfGrid Height="200" DataSource="@Affaires" TValue="AffaireContentieuse" EnableVirtualization="true" AllowGrouping="true" AllowSorting="true" AllowFiltering="true" AllowExcelExport="true"
+    <SfGrid Height="200" DataSource="@Affaires" AllowSorting="true" AllowFiltering="true" AllowPaging="true"
             Toolbar="@(new List<string> { "Add", "Edit", "Delete", "Update", "Cancel", "Search", "ExcelExport" })"
             EditSettings="@EditSettings" @ref="AffairesGrid">
         <GridEvents Created="fetchData" OnToolbarClick="OnToolbarClickHandler" OnActionBegin="OnActionBeginAsync" OnActionComplete="OnActionCompleteAsync" TValue="AffaireContentieuse"></GridEvents>
         <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Excel"></GridFilterSettings>
         <GridColumns>
-            <GridColumn Field="IdAffaire" Visible="false" IsPrimaryKey="true"></GridColumn>
-
             <GridColumn Field="ReferenceAffaire" HeaderText="Reference" Width="120" ValidationRules="@(new ValidationRules { Required = true })"></GridColumn>
 
             <GridColumn Field="DateOuverture" HeaderText="Date Ouverture" Width="120" Type="ColumnType.Date" Format="yyyy-MM-dd"></GridColumn>
@@ -83,7 +81,7 @@
 
             <GridColumn Field="Description" HeaderText="Description" Width="200"></GridColumn>
 
-            <GridColumn Field="OperateurId" HeaderText="Opérateur" Width="120">
+            <GridColumn Field="Operateur" HeaderText="Opérateur" Width="120">
     @*             <Template>
                     @{
                         var op = Operateurs.FirstOrDefault(o => o.OperateurId == (context as AffaireContentieuse)?.OperateurId);
@@ -115,7 +113,7 @@
         public string Statut { get; set; } // enum(enCours/Cloturee)
         public string Description { get; set; }
         public string ReferenceAffaire { get; set; }
-        public int OperateurId { get; set; }
+        public string Operateur { get; set; }
     }
     private List<AffaireContentieuse>? Affaires;
     //private List<Operateur> Operateurs = new();
@@ -139,9 +137,9 @@
         // Operateurs = await OperateurService.GetAllAsync();
         // Affaires = await AffaireContentieuseService.GetAllAsync();
         Affaires = new List<AffaireContentieuse> {
-            new() { IdAffaire=1, DateOuverture=DateTime.Now.AddMonths(-6), DateCloture=DateTime.Now.AddMonths(-1), Statut="Cloturee", Description="Litige commercial résolu", ReferenceAffaire="AFF-2023-001", OperateurId=3 },
-            new() { IdAffaire=2, DateOuverture=DateTime.Now.AddMonths(-2), DateCloture=DateTime.MinValue, Statut="enCours", Description="Procédure en cours avec un fournisseur", ReferenceAffaire="AFF-2023-002", OperateurId=5 },
-            new() { IdAffaire=3, DateOuverture=DateTime.Now.AddMonths(-12), DateCloture=DateTime.Now.AddMonths(-3), Statut="Cloturee", Description="Affaire juridique clôturée avec succès", ReferenceAffaire="AFF-2022-078", OperateurId=2 }
+            new() { IdAffaire=1, DateOuverture=DateTime.Now.AddMonths(-6), DateCloture=DateTime.Now.AddMonths(-1), Statut="Cloturee", Description="Litige commercial résolu", ReferenceAffaire="AFF-2023-001", Operateur="Opérateur 1" },
+            new() { IdAffaire=2, DateOuverture=DateTime.Now.AddMonths(-2), DateCloture=DateTime.MinValue, Statut="enCours", Description="Procédure en cours avec un fournisseur", ReferenceAffaire="AFF-2023-002", Operateur="Opérateur 2" },
+            new() { IdAffaire=3, DateOuverture=DateTime.Now.AddMonths(-12), DateCloture=DateTime.Now.AddMonths(-3), Statut="Cloturee", Description="Affaire juridique clôturée avec succès", ReferenceAffaire="AFF-2022-078", Operateur="Opérateur 3" }
         };
         // VisibleProperty = false;
     }

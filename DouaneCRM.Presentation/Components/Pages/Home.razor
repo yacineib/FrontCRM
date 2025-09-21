@@ -1,32 +1,156 @@
-﻿@page "/"
-@using Syncfusion.Blazor.Buttons
-@using Syncfusion.Blazor.Grids
-
-<PageTitle>Home</PageTitle>
-
-<h1 class="text-xl underline">
-    Hello world!
-</h1>
+﻿@page "/dashboard"
+@using Syncfusion.Blazor.Cards
 
 
-@code{
-    public class model
-    {
-        public int id;
-        public string name;
-        public int age;
+<style>
+    .dashboard {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Always 2 per row */
+        gap: 10px;
+        padding: 20px;
     }
 
-    public List<model> listexemple;
-
-    protected override void OnInitialized()
-    {
-        listexemple = new List<model>
-        {
-            new () { id = 1, age = 18, name = "Yassine" },
-            new () { id = 2, age = 20, name = "Youness" },
-            new () { id = 3, age = 22, name = "Someone" },
-        };
+    /* Card style */
+    .card {
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-}
+    /* Card header */
+    .card-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2c3e50;
+        margin: 0;
+    }
+
+    .card-link {
+        display: inline-block;
+        margin-top: 8px;
+        font-size: 0.9rem;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .card-link:hover {
+            text-decoration: underline;
+        }
+
+    /* Status colors */
+    .open {
+        color: #007bff;
+    }
+
+    .progress {
+        color: #f39c12;
+    }
+
+    .closed {
+        color: #27ae60;
+    }
+
+    .success {
+        color: #27ae60;
+    }
+
+    .error {
+        color: #e74c3c;
+    }
+
+    .active {
+        color: #27ae60;
+    }
+
+    .expired {
+        color: #e67e22;
+    }
+
+
+</style>
+
+
+<div class="dashboard">
+    <SfCard CssClass="card">
+        <CardHeader>
+            <div class="card-header">
+                <h2 class="card-number">120</h2>
+                <h4>Fiches d’accompagnement</h4>
+            </div>
+        </CardHeader>
+        <CardContent>
+            <p><span class="open">50 Ouvertes</span> · <span class="progress">40 En cours</span> · <span class="closed">30 Clôturées</span></p>
+            <a href="/list-fiches-accompagnement" class="card-link">Voir les fiches</a>
+        </CardContent>
+    </SfCard>
+
+    <SfCard CssClass="card">
+        <CardHeader>
+            <div class="card-header">
+                <h2 class="card-number">35</h2>
+                <h4>Régimes Économiques (RED)</h4>
+            </div>
+        </CardHeader>
+        <CardContent>
+            <p><span class="active">20 Actifs</span> · <span class="expired">15 Expirés</span></p>
+            <a href="/list-reds" class="card-link">Voir les RED</a>
+        </CardContent>
+    </SfCard>
+
+    <SfCard CssClass="card">
+        <CardHeader>
+            <div class="card-header">
+                <h2 class="card-number">12</h2>
+                <h4>Affaires contentieuses</h4>
+            </div>
+        </CardHeader>
+        <CardContent>
+            <p><span class="progress">7 En cours</span> · <span class="closed">5 Clôturées</span></p>
+            <a href="/list-affaires-contentieuses" class="card-link">Voir les affaires</a>
+        </CardContent>
+    </SfCard>
+
+    <SfCard CssClass="card">
+        <CardHeader>
+            <div class="card-header">
+                <h2 class="card-number">50</h2>
+                <h4>Contrôles réalisés</h4>
+            </div>
+        </CardHeader>
+        <CardContent>
+            <p><span class="success">35 Favorables</span> · <span class="error">15 Défavorables</span></p>
+            <a href="/list-controles" class="card-link">Voir les contrôles</a>
+        </CardContent>
+    </SfCard>
+
+    <SfCard CssClass="card">
+        <CardHeader>
+            <div class="card-header">
+                <h2 class="card-number">80</h2>
+                <h4>Liquidations</h4>
+            </div>
+        </CardHeader>
+        <CardContent>
+            <p><span class="success">60 Payées</span> · <span class="progress">20 En attente</span></p>
+            <a href="/list-liquidations" class="card-link">Voir les liquidations</a>
+        </CardContent>
+    </SfCard>
+
+    <SfCard CssClass="card">
+        <CardHeader>
+            <div class="card-header">
+                <h2 class="card-number">200</h2>
+                <h4>Opérateurs enregistrés</h4>
+            </div>
+        </CardHeader>
+        <CardContent>
+            <p><span class="success">180 Actifs</span> · <span class="error">20 Suspendus</span></p>
+            <a href="/list-operateurs" class="card-link">Voir les opérateurs</a>
+        </CardContent>
+    </SfCard>
+</div>

@@ -1,0 +1,245 @@
+﻿@page "/list-fiches-accompagnement"
+
+@using Syncfusion.Blazor.Cards
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.Notifications
+@using Syncfusion.Blazor.Popups
+@using Syncfusion.Blazor.Spinner
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.DropDowns
+@using System.ComponentModel.DataAnnotations
+
+<style>
+    .e-grid .e-rowcell.e-selectionbackground {
+        background-color: #6aaa37;
+        color: white !important;
+        font-weight: bold;
+    }
+
+    .e-toast-container .e-toast {
+        background-color: #6aaa37;
+    }
+
+        .e-toast-container .e-toast .e-toast-message .e-toast-content {
+            color: white;
+            font-size: 13px;
+        }
+
+        .e-toast-container .e-toast .e-toast-message .e-toast-title {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+    .e-card {
+        padding: 20px;
+        margin: 10px;
+    }
+
+        .e-card .e-card-header .e-card-header-caption .e-card-header-title {
+            font-size: large;
+            font-weight: bold;
+            margin-bottom: 1%;
+        }
+</style>
+
+<PageTitle>Fiches d'accompagnement</PageTitle>
+
+<SfToast @ref="ToastObj">
+    <ToastPosition X="Right" Y="Bottom"></ToastPosition>
+</SfToast>
+
+<SfDialog @ref="ConfirmDialog" Width="400px" IsModal="true" ShowCloseIcon="true" Visible="false"
+          Content="Êtes-vous sûr de vouloir supprimer cette fiche d'accompagnement ?" Header="Confirmation de suppression">
+    <DialogButtons>
+        <DialogButton IsPrimary="true" Content="Ok" OnClick="@OnConfirmDelete" />
+        <DialogButton Content="Annuler" OnClick="@OnCancelDelete" />
+    </DialogButtons>
+</SfDialog>
+
+<SfCard>
+    <CardHeader Title="Liste des fiches d'accompagnement" />
+    <SfGrid Height="300" DataSource="@Fiches" AllowSorting="true" AllowFiltering="true" AllowPaging="true"
+            Toolbar="@(new List<string> { "Add", "Edit", "Delete", "Update", "Cancel", "Search", "ExcelExport" })"
+            EditSettings="@EditSettings" @ref="FichesGrid">
+        <GridEvents Created="fetchData" OnToolbarClick="OnToolbarClickHandler" OnActionBegin="OnActionBeginAsync" OnActionComplete="OnActionCompleteAsync" TValue="FicheAccompagnement"></GridEvents>
+        <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Excel"></GridFilterSettings>
+        <GridColumns>
+            <GridColumn Field="IdFiche" Visible="false" IsPrimaryKey="true"></GridColumn>
+
+            <GridColumn Field="DateCreation" HeaderText="Date Création" Width="120" Type="ColumnType.Date" Format="yyyy-MM-dd"></GridColumn>
+            <GridColumn Field="Objet" HeaderText="Objet" Width="150" ValidationRules="@(new ValidationRules { Required = true })"></GridColumn>
+            <GridColumn Field="Description" HeaderText="Description" Width="200"></GridColumn>
+
+            <GridColumn Field="Statut" HeaderText="Statut" Width="120">
+                <EditTemplate>
+                    <SfDropDownList TValue="string" TItem="string"
+                                    DataSource="@(new List<string>{ "Ouverte", "EnCours", "Cloturee" })"
+                                    @bind-Value="(context as FicheAccompagnement).Statut">
+                    </SfDropDownList>
+                </EditTemplate>
+            </GridColumn>
+
+            <GridColumn Field="Commentaires" HeaderText="Commentaires" Width="200"></GridColumn>
+
+            <GridColumn Field="OperateurId" HeaderText="Opérateur" Width="150">
+                <Template>
+                    @{
+                        var op = Operateurs.FirstOrDefault(o => o.IdOperateur == (context as FicheAccompagnement)?.OperateurId);
+                        <span>@(op?.Nom ?? "Unknown")</span>
+                    }
+                </Template>
+                <EditTemplate>
+                    <SfDropDownList TItem="Operateur" TValue="int"
+                                    DataSource="@Operateurs"
+                                    Placeholder="Sélectionner un opérateur"
+                                    @bind-Value="(context as FicheAccompagnement).OperateurId">
+                        <DropDownListFieldSettings Text="Nom" Value="IdOperateur"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                </EditTemplate>
+            </GridColumn>
+        </GridColumns>
+        <SfSpinner @bind-Visible="@VisibleProperty"></SfSpinner>
+    </SfGrid>
+</SfCard>
+
+@code {
+    public class FicheAccompagnement
+    {
+        public int IdFiche { get; set; }
+        public DateTime DateCreation { get; set; }
+        public string Objet { get; set; }
+        public string Description { get; set; }
+        public string Statut { get; set; } // enum(Ouverte/EnCours/Cloturee)
+        public string Commentaires { get; set; }
+        public int AgentCreateurId { get; set; }
+        public int OperateurId { get; set; }
+    }
+
+    public class Operateur
+    {
+        public int IdOperateur { get; set; }
+        public string Nom { get; set; }
+        public string RC { get; set; }
+        public string IF { get; set; }
+        public string Adresse { get; set; }
+        public string Telephone { get; set; }
+        public string Email { get; set; }
+        public string ActivitePrincipale { get; set; }
+        public string StatutDouanier { get; set; } // enum(Actif/Suspendu)
+    }
+
+    private List<FicheAccompagnement>? Fiches;
+    private List<Operateur> Operateurs = new();
+    private SfGrid<FicheAccompagnement> FichesGrid = null!;
+    private SfToast ToastObj = null!;
+    private SfDialog ConfirmDialog = null!;
+    private ActionEventArgs<FicheAccompagnement>? PendingDeleteArgs;
+    private bool VisibleProperty { get; set; }
+
+    private GridEditSettings EditSettings = new()
+    {
+        AllowAdding = true,
+        AllowEditing = true,
+        AllowDeleting = true,
+        Mode = EditMode.Dialog
+    };
+
+    private async Task fetchData()
+    {
+        // VisibleProperty = true;
+        // Operateurs = await OperateurService.GetAllAsync();
+        // Fiches = await FicheAccompagnementService.GetAllAsync();
+        Operateurs = new List<Operateur> {
+            new() { IdOperateur=1, Nom="Opérateur A" },
+            new() { IdOperateur=2, Nom="Opérateur B" },
+            new() { IdOperateur=3, Nom="Opérateur C" }
+        };
+        Fiches = new List<FicheAccompagnement> {
+            new() { IdFiche=1, DateCreation=DateTime.Now.AddMonths(-2), Objet="Suivi importation", Description="Assistance import", Statut="Ouverte", Commentaires="RAS", AgentCreateurId=1, OperateurId=1 },
+            new() { IdFiche=2, DateCreation=DateTime.Now.AddMonths(-1), Objet="Contrôle douanier", Description="Inspection en cours", Statut="EnCours", Commentaires="Délai prévu 2 semaines", AgentCreateurId=2, OperateurId=2 },
+            new() { IdFiche=3, DateCreation=DateTime.Now.AddMonths(-5), Objet="Litige TVA", Description="Problème réglé", Statut="Cloturee", Commentaires="Affaire close", AgentCreateurId=3, OperateurId=3 }
+        };
+        // VisibleProperty = false;
+    }
+
+    private async Task OnToolbarClickHandler(Syncfusion.Blazor.Navigations.ClickEventArgs args)
+    {
+        if (args.Item?.Id?.Contains("_excelexport") == true)
+            await FichesGrid.ExportToExcelAsync();
+    }
+
+    private async Task OnActionBeginAsync(ActionEventArgs<FicheAccompagnement> args)
+    {
+        if (args.RequestType == Syncfusion.Blazor.Grids.Action.Save)
+        {
+            if (args.Data != null)
+            {
+                var context = new ValidationContext(args.Data);
+                var results = new List<ValidationResult>();
+                if (!Validator.TryValidateObject(args.Data, context, results, true))
+                {
+                    await ShowToastAsync("Validation échouée: " + string.Join(", ", results.Select(r => r.ErrorMessage)), "Erreur");
+                    args.Cancel = true;
+                }
+            }
+        }
+        else if (args.RequestType == Syncfusion.Blazor.Grids.Action.Delete)
+        {
+            if (args.Data != null)
+            {
+                PendingDeleteArgs = args;
+                await ConfirmDialog.ShowAsync();
+                args.Cancel = true;
+            }
+        }
+    }
+
+    private async Task OnActionCompleteAsync(ActionEventArgs<FicheAccompagnement> args)
+    {
+        if (args.RequestType == Syncfusion.Blazor.Grids.Action.Save && args.Data != null)
+        {
+            if (args.Action == "Add")
+            {
+                // await FicheAccompagnementService.AddAsync(args.Data);
+                await ShowToastAsync("Fiche ajoutée avec succès.", "Succès");
+            }
+            else if (args.Action == "Edit")
+            {
+                // await FicheAccompagnementService.UpdateAsync(args.Data);
+                await ShowToastAsync("Fiche mise à jour avec succès.", "Succès");
+            }
+            // Fiches = await FicheAccompagnementService.GetAllAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task OnConfirmDelete(Microsoft.AspNetCore.Components.Web.MouseEventArgs args)
+    {
+        if (PendingDeleteArgs?.Data != null)
+        {
+            // await FicheAccompagnementService.DeleteAsync(PendingDeleteArgs.Data.IdFiche);
+            Fiches?.Remove(PendingDeleteArgs.Data);
+            await FichesGrid.Refresh();
+            await ShowToastAsync("Fiche supprimée avec succès.", "Succès");
+        }
+        await ConfirmDialog.HideAsync();
+    }
+
+    private async Task OnCancelDelete(Microsoft.AspNetCore.Components.Web.MouseEventArgs args)
+    {
+        await ConfirmDialog.HideAsync();
+    }
+
+    private async Task ShowToastAsync(string message, string title)
+    {
+        await ToastObj.ShowAsync(new ToastModel
+        {
+            Content = message,
+            Title = title,
+            CssClass = title == "Succès" ? "e-toast-success" : "e-toast-danger",
+            Icon = title == "Succès" ? "e-success toast-icons" : "e-error toast-icons",
+            Timeout = 3000
+        });
+    }
+}

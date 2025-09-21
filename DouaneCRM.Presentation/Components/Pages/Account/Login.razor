@@ -1,0 +1,135 @@
+﻿@page "/"
+@using DouaneCRM.Presentation.Components.Layout
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Inputs
+@using System.ComponentModel.DataAnnotations
+@inject NavigationManager NavigationManager
+@layout LoginLayout
+
+<style>
+    .login-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 100vh;
+    }
+
+    /* Left side */
+    .login-banner {
+        background-color: #f5f6fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: blur(4px);
+    }
+
+    /* Right side */
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+        padding: 40px;
+        background: #fff;
+        box-shadow: -2px 0 6px rgba(0,0,0,0.1);
+    }
+
+    .login-form h2 {
+        margin: 20px 0;
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #2c3e50;
+        text-align: center;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .logo img {
+        height: 120px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 350px !important; /* keeps form compact */
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #34495e;
+        font-size: 1.3rem;
+    }
+
+    .e-input-group input {
+        font-size: 1.2rem !important; /* bigger text inside textbox */
+        padding: 16px 14px !important; /* taller & wider input */
+        border-radius: 8px !important; /* modern rounded edges */
+        min-width: 600px !important;
+        min-height: 50px !important;
+    }
+
+    /* Modern button */
+    .login-button {
+        width: 100%;
+        max-width: 350px;
+        padding: 16px !important; /* bigger button */
+        font-size: 1.2rem !important; /* bigger text */
+        font-weight: 600;
+        border-radius: 8px;
+        background: #007bff !important; /* keep same color */
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .login-button:hover {
+        background: #0069d9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-banner">
+        <img src="Icons/douanieres.jpeg" alt="Banner" />
+    </div>
+
+    <div class="login-form">
+        <div class="logo">
+            <img src="Icons/Logo2.jpg" alt="Logo" />
+        </div>
+
+        <h2>Se connecter</h2>
+
+        <div>
+            <div class="form-group">
+                <label for="username">Nom d’utilisateur</label>
+                <SfTextBox Placeholder="Entrer votre nom"></SfTextBox>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <SfTextBox Placeholder="Entrer votre mot de passe" Type="InputType.Password"></SfTextBox>
+            </div>
+
+            <SfButton CssClass="login-button" IsPrimary="true" OnClick="HandleLogin">S'authentifier</SfButton>
+        </div>
+    </div>
+</div>
+
+@code {
+    private async Task HandleLogin()
+    {
+        NavigationManager.NavigateTo("/dashboard");
+        Console.WriteLine("Invalid credentials.");
+    }
+}

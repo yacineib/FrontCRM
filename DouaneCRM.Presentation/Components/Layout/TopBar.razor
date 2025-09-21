@@ -1,10 +1,11 @@
 ﻿@using Syncfusion.Blazor.Navigations
 @using Syncfusion.Blazor.Buttons
+@inject NavigationManager navigationManager
 
 <div class="control-container">
     <SfAppBar ColorMode="AppBarColor.Primary">
         <AppBarSpacer></AppBarSpacer>
-        <SfButton CssClass="e-inherit" Content="Se déconnecter"></SfButton>
+        <SfButton CssClass="e-inherit" Content="Se déconnecter" OnClick="NavigateToLogin"></SfButton>
     </SfAppBar>
 </div>
 
@@ -16,3 +17,12 @@
         margin: 0 3px;
     }
 </style>
+
+@code{
+
+    public void NavigateToLogin()
+    {
+        navigationManager.NavigateTo("/");
+    }
+
+}
