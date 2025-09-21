@@ -182,6 +182,28 @@
 
     private async Task OnActionCompleteAsync(ActionEventArgs<Operateur> args)
     {
+        if (args.RequestType == Syncfusion.Blazor.Grids.Action.Save && args.Data != null)
+        {
+            if (args.Action == "Add")
+            {
+                // 1. Generate a temporary ID for the new item
+                args.Data.IdOperateur = (Operateurs.Any() ? Operateurs.Max(o => o.IdOperateur) : 0) + 1;
+
+                // 2. Add the new operator to your local list
+                Operateurs?.Add(args.Data);
+
+                await ShowToastAsync("Opérateur ajouté avec succès.", "Succès");
+            }
+            else if (args.Action == "Edit")
+            {
+                // For editing, no extra code is needed.
+                // The grid updates the item in the list for you.
+                await ShowToastAsync("Opérateur mis à jour.", "Succès");
+            }
+
+            // Refresh the grid to show the changes
+            await OperateursGrid.Refresh();
+        }
         // if (args.RequestType == Syncfusion.Blazor.Grids.Action.Save && args.Data != null)
         // {
         //     if (args.Action == "Add")
@@ -209,6 +231,19 @@
         //     await OperateursGrid.Refresh();
         // }
         // await ConfirmDialog.HideAsync();
+        if (PendingDeleteArgs?.Data != null)
+        {
+            // 1. Manually remove the item from the list
+            Operateurs?.Remove(PendingDeleteArgs.Data);
+
+            // 2. Refresh the grid to reflect the deletion
+            await OperateursGrid.Refresh();
+
+            await ShowToastAsync("Opérateur supprimé.", "Succès");
+        }
+
+        // Hide the confirmation dialog
+        await ConfirmDialog.HideAsync();
     }
 
     private async Task OnCancelDelete(Microsoft.AspNetCore.Components.Web.MouseEventArgs args)

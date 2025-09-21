@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.Blazor.Navigations
 @using Syncfusion.Blazor.Buttons
-
+@inject NavigationManager navigationManager
 
 <style>
     * {
@@ -120,13 +120,35 @@
 
     <nav>
         <ul>
-            <li><img src="/Icons/dashboard.png" /><a href="/dashboard">Dashboard</a></li>
-            <li><img src="Icons/operateur.png" /><a href="/list-operateurs">Operateurs</a></li>
-            <li><img src="/Icons/control.png" /><a href="/list-controles">Controles</a></li>
-            <li><img src="/Icons/ficheacc.png" /><a href="/list-fiches-accompagnement">Fiches D'Accompagnement</a></li>
-            <li><img src="/Icons//liquidity.png" /><a href="/list-liquidations">Liquidations</a></li>
-            <li><img src="/Icons//courthouse.png" /><a href="/list-affaires-contentieuses">Affaires Contentieuses</a></li>
-            <li><img src="/Icons//achievement.png" /><a href="/list-reds">RED</a></li>
+            <li @onclick="@(() => Navigate("/dashboard"))">
+                <img src="/Icons/dashboard.png" />Dashboard
+            </li>
+
+            <li @onclick="@(() => Navigate("/list-operateurs"))">
+                <img src="/Icons/operateur.png" />Opérateurs
+            </li>
+
+            <li @onclick="@(() => Navigate("/list-controles"))">
+                <img src="/Icons/control.png" />Contrôles
+            </li>
+
+            <li @onclick="@(() => Navigate("/list-fiches-accompagnement"))">
+                <img src="/Icons/ficheacc.png" />Fiches d'Accompagnement
+            </li>
+
+            <li @onclick="@(() => Navigate("/list-liquidations"))">
+                <img src="/Icons/liquidity.png" />Liquidations
+            </li>
+
+            <li @onclick="@(() => Navigate("/list-affaires-contentieuses"))">
+                <img src="/Icons/courthouse.png" />Affaires Contentieuses
+            </li>
+
+            <li @onclick="@(() => Navigate("/list-reds"))">
+                <img src="/Icons/achievement.png" />RED
+            </li>
+
+
         </ul>
     </nav>
 
@@ -147,6 +169,10 @@
     public void Close()
     {
         SidebarToggle = false;
+    }
+    public void Navigate(string path)
+    {
+        navigationManager.NavigateTo(path);
     }
 }
 

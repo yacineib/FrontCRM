@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DouaneCRM.Presentation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7896561a3131a4cd0b684fe55d363c938a1f623")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9cbab6c39f21fd71a313415ada9c086d881f3c6")]
 [assembly: System.Reflection.AssemblyProductAttribute("DouaneCRM.Presentation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DouaneCRM.Presentation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

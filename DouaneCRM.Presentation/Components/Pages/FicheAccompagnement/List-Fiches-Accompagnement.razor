@@ -151,9 +151,11 @@
         // Operateurs = await OperateurService.GetAllAsync();
         // Fiches = await FicheAccompagnementService.GetAllAsync();
         Operateurs = new List<Operateur> {
-            new() { IdOperateur=1, Nom="Opérateur A" },
-            new() { IdOperateur=2, Nom="Opérateur B" },
-            new() { IdOperateur=3, Nom="Opérateur C" }
+            new() { IdOperateur=1, Nom="Opérateur 1" },
+            new() { IdOperateur=2, Nom="Opérateur 2" },
+            new() { IdOperateur=3, Nom="Opérateur 3" },
+            new() { IdOperateur=4, Nom="Opérateur 4" },
+            new() { IdOperateur=5, Nom="Opérateur 5" },
         };
         Fiches = new List<FicheAccompagnement> {
             new() { IdFiche=1, DateCreation=DateTime.Now.AddMonths(-2), Objet="Suivi importation", Description="Assistance import", Statut="Ouverte", Commentaires="RAS", AgentCreateurId=1, OperateurId=1 },
