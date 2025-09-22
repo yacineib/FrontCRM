@@ -160,8 +160,11 @@
     private async Task fetchData()
     {
         Operateurs = new List<Operateur> {
-            new() { IdOperateur=1, Nom="Opérateur A" },
-            new() { IdOperateur=2, Nom="Opérateur B" }
+            new() { IdOperateur=1, Nom="Opérateur 1" },
+            new() { IdOperateur=2, Nom="Opérateur 2" },
+            new() { IdOperateur=1, Nom="Opérateur 3" },
+            new() { IdOperateur=2, Nom="Opérateur 4" },
+            new() { IdOperateur=2, Nom="Opérateur 5" }
         };
         Agents = new List<Agent> {
             new() { IdAgent=1, Nom="Agent X" },

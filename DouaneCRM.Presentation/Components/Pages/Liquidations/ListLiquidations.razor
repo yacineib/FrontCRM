@@ -2,6 +2,7 @@
 @using Syncfusion.Blazor.Buttons
 @using Syncfusion.Blazor.Cards
 @using Syncfusion.Blazor.Data
+@using Syncfusion.Blazor.DropDowns
 @using Syncfusion.Blazor.Grids
 @using Syncfusion.Blazor.Internal
 @using Syncfusion.Blazor.Layouts
@@ -66,7 +67,27 @@
         <GridEvents Created="fetchData" OnToolbarClick="OnToolbarClickHandler" OnActionBegin="OnActionBeginAsync" OnActionComplete="OnActionCompleteAsync" TValue="Liquidation"></GridEvents>
         <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Excel"></GridFilterSettings>
         <GridColumns>
-            <GridColumn Field="OperateurId" HeaderText="Opérateur" Width="120"></GridColumn>
+
+            <GridColumn Field="OperateurId" HeaderText="Operateur" Width="150">
+                <!-- Display mode -->
+                <Template Context="context">
+                    @{
+                        var operateur = Operateurs.FirstOrDefault(o => o.IdOperateur == ((Liquidation)context).OperateurId);
+                    }
+                    @operateur?.Nom
+                </Template>
+
+                <!-- Edit/Add mode -->
+                <EditTemplate Context="context">
+                    <SfDropDownList TValue="int" TItem="Operateur"
+                                    @bind-Value="((Liquidation)context).OperateurId"
+                                    DataSource="@Operateurs"
+                                    Placeholder="Sélectionnez un opérateur"
+                                    PopupHeight="220px">
+                        <DropDownListFieldSettings Text="Nom" Value="IdOperateur"></DropDownListFieldSettings>
+                    </SfDropDownList>
+                </EditTemplate>
+            </GridColumn>
             <GridColumn Field="Montant" HeaderText="Montant" Width="150" ValidationRules="@(new ValidationRules { Required = true })" Format="DH #,##0.00"></GridColumn>
             <GridColumn Field="Date" HeaderText="Date" Width="150" Format="d" EditType="EditType.DatePickerEdit"></GridColumn>
             <GridColumn Field="DateEcheance" HeaderText="Date Échéance" Width="150" Format="d" EditType="EditType.DatePickerEdit"></GridColumn>
@@ -86,12 +107,28 @@
         public int OperateurId { get; set; }
     }
 
+    public class Operateur
+    {
+        public int IdOperateur { get; set; }
+        public string Nom { get; set; }
+    }
+
+
     private List<Liquidation>? Liquidations;
     private SfGrid<Liquidation> LiquidationsGrid = null!;
     private SfToast ToastObj = null!;
     private SfDialog ConfirmDialog = null!;
     private ActionEventArgs<Liquidation>? PendingDeleteArgs;
     private bool VisibleProperty { get; set; } = false;
+    private List<Operateur> Operateurs = new()
+    {
+        new() { IdOperateur = 1, Nom = "Opérateur 1" },
+        new() { IdOperateur = 2, Nom = "Opérateur 2" },
+        new() { IdOperateur = 3, Nom = "Opérateur 3" },
+        new() { IdOperateur = 4, Nom = "Opérateur 4" },
+        new() { IdOperateur = 5, Nom = "Opérateur 5" }
+    };
+
 
     private GridEditSettings EditSettings = new()
     {
